@@ -34,7 +34,6 @@
 }
 
 .flashcard-front, .flashcard-back {
-  background-color: whitesmoke;
   align-content: center;
   position: absolute;
   width: 100%;
@@ -50,6 +49,26 @@
 .flashcard-back {
   color: black;
   transform: rotateX(180deg);
+}
+
+.flashcard-color-default {
+  background-color: whitesmoke;
+}
+
+.flashcard-color-red {
+  background-color: tomato;
+}
+
+.flashcard-color-green {
+  background-color: mediumaquamarine;
+}
+
+.flashcard-color-yellow {
+  background-color: gold;
+}
+
+.flashcard-color-blue {
+  background-color: dodgerblue;
 }
 
 .flashcard-button {
