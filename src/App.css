@@ -5,20 +5,21 @@
 }
 
 .header-container {
-  padding: 50px;
+  padding: 90px;
   text-align: center;
+  background-color: transparent;
 }
 
 .flashcard {
   display: flex;
-  padding: 50px;
-  background-color: transparent;
+  padding: 25px;
   width: 550px;
   height: 350px;
   perspective: 1000px;
 }
 
 .flashcard-inner {
+  background-color: whitesmoke;
   position: relative;
   width: 100%;
   height: 100%;
@@ -33,6 +34,7 @@
 }
 
 .flashcard-front, .flashcard-back {
+  background-color: whitesmoke;
   align-content: center;
   position: absolute;
   width: 100%;
@@ -48,4 +50,11 @@
 .flashcard-back {
   color: black;
   transform: rotateX(180deg);
+}
+
+.flashcard-button {
+  padding: 3px 20px 3px 20px;
+  font-size: 30px;
+  color: white;
+  background-color: rgba(0, 0, 0, .25);
 }

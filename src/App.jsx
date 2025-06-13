@@ -47,7 +47,7 @@ const App = () => {
         </div>
       </div>
 
-      <button onClick={handleFlashcard}> &rarr; </button> 
+      <button onClick={handleFlashcard} className="flashcard-button"> &rarr; </button> 
 
     </div>
   )
