@@ -4,27 +4,37 @@ import { useState } from 'react';
 const App = () => {
 
   const QandA = {
-    "Hello": "badingi1", // phrase
-    "Nice to meet you": "badingi2", // phrase
-    "Excuse me": "badingi3", // phrase
-    "Thank you": "badingi4", // phrase
-    "Left": "badingi5", // directions
-    "Right": "badingi6", // directions
-    "Bathroom": "badingi7", // places 
-    "Entrance": "badingi8", // places
-    "One (number)": "badingi9", // numbers
-    "Ten (number)": "badingi10", // numbers
+    "Hello!": "Kon'nichiwa!", // greeting
+    "Nice to meet you": "Onegai shimasu", // greeting
+    "Excuse me": "Sumimasen", // greeting
+    "Thank you": "Arigatōgozaimasu", // greeting
+    "Yes": "Hai", // greeting
+    "No": "Īe", // greeting
+    "Left": "Hidari", // directions
+    "Right": "Migi", // directions
+    "Bathroom": "Basurūmu", // places 
+    "Entrance": "Iriguchi", // places
+    "One (number)": "Ichi", // numbers
+    "Two (number)": "Ni", // numbers
+    "Three (number)": "San", // numbers
+    "Four (number)": "Shi", // numbers
+    "Five (number)": "Go", // numbers
+    "Six (number)": "Roku", // numbers
+    "Seven (number)": "Shichi", // numbers
+    "Eight (number)": "Hachi", // numbers
+    "Nine (number)": "Kyu", // numbers
+    "Ten (number)": "Ju", // numbers
   };
 
   // that was over engineered i'm just gonna type it in myself bruh
   const [currentQuestion, setCurrentQuestion] = useState("Welcome! Hover over flashcards to flip them over, instructions are on the back of THIS card."); 
-  const [currentAnswer, setCurrentAnswer] = useState("The front of a card will always be a COLORED card, the back will be WHITE - phrase in Japanese on FRONT, translation on BACK! good luck!"); 
+  const [currentAnswer, setCurrentAnswer] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!"); 
   const [flashcardColorClass, setflashcardColorClass] = useState("flashcard-color-default");
 
   const questions = Object.keys(QandA);
 
-  const phrases = ["Hello", "Nice to meet you", "Excuse me", "Thank you"];
-  const numbers = ["One (number)", "Ten (number)"];
+  const greetings = ["Hello!", "Nice to meet you", "Excuse me", "Thank you", "Yes", "No"];
+  const numbers = ["One (number)", "Two (number)", "Three (number)", "Four (number)", "Five (number)", "Six (number)", "Seven (number)", "Eight (number)", "Nine (number)", "Ten (number)"];
   const directions = ["Left", "Right"];
   const places = ["Bathroom", "Entrance"];
 
@@ -33,17 +43,13 @@ const App = () => {
     setCurrentQuestion(questions[random]);
     setCurrentAnswer(QandA[questions[random]]);
 
-    if (phrases.includes(questions[random])) { // phrases
-      console.log('yes!1');
+    if (greetings.includes(questions[random])) { // phrases
       setflashcardColorClass("flashcard-color-red");
     } else if (numbers.includes(questions[random])) { // numbers
-      console.log('yes!2');
       setflashcardColorClass("flashcard-color-green");
     } else if (directions.includes(questions[random])) { // directions
-      console.log('yes!3');
       setflashcardColorClass("flashcard-color-yellow");
     } else if (places.includes(questions[random])) { // places
-      console.log('yes!4');
       setflashcardColorClass("flashcard-color-blue");
     } 
   }
@@ -56,8 +62,22 @@ const App = () => {
         <h4> Number of cards: {questions.length} </h4>
       </div>
 
+      <dl className="question-legend">
+        <dt className="flashcard-color-red"></dt>
+        <dd>greetings</dd>
+
+        <dt className="flashcard-color-green"></dt>
+        <dd>numbers</dd>
+
+        <dt className="flashcard-color-yellow"></dt>
+        <dd>directions</dd>
+
+        <dt className="flashcard-color-blue"></dt>
+        <dd>places</dd>
+      </dl>
+
       <div className="flashcard">
-        <div class="flashcard-inner">
+        <div className="flashcard-inner">
           <div className={"flashcard-front " + flashcardColorClass}>
             <h3> {currentQuestion} </h3>
           </div>

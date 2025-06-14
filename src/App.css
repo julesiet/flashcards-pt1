@@ -5,14 +5,14 @@
 }
 
 .header-container {
-  padding: 90px;
+  padding: 10px;
   text-align: center;
   background-color: transparent;
 }
 
 .flashcard {
   display: flex;
-  padding: 25px;
+  padding: 10px;
   width: 550px;
   height: 350px;
   perspective: 1000px;
@@ -35,7 +35,8 @@
 
 .flashcard-front, .flashcard-back {
   align-content: center;
-  position: absolute;
+  justify-content: center;
+  position: fixed;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
@@ -48,6 +49,9 @@
 
 .flashcard-back {
   color: black;
+  margin: 130px 15px 100px 15px;
+  width: 525px;
+  height: 100px;
   transform: rotateX(180deg);
 }
 
@@ -56,19 +60,19 @@
 }
 
 .flashcard-color-red {
-  background-color: tomato;
+  background-color: rgba(255, 99, 71, 0.5);
 }
 
 .flashcard-color-green {
-  background-color: mediumaquamarine;
+  background-color: rgba(102, 205, 171, 0.5);
 }
 
 .flashcard-color-yellow {
-  background-color: gold;
+  background-color: rgba(255, 217, 0, 0.5);
 }
 
 .flashcard-color-blue {
-  background-color: dodgerblue;
+  background-color: rgba(30, 143, 255, 0.5);
 }
 
 .flashcard-button {
@@ -76,4 +80,33 @@
   font-size: 30px;
   color: white;
   background-color: rgba(0, 0, 0, .25);
+}
+
+.question-legend {
+  background-color: rgba(255, 255, 255, .5);
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 90%;
+  padding: 10px 30px 10px 30px;
+  border: 1px solid #000000;
+}
+
+dl dt{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+dl dd{
+    display: inline-block;
+    margin: 0px 10px;
+    padding-bottom: 0;
+    vertical-align: middle;
+}
+dl dt.red{
+    background: #f8d7da;
+}
+dl dt.yellow{
+    background: #f2c715;
 }
