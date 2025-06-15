@@ -30,6 +30,7 @@ const App = () => {
   const [currentQuestion, setCurrentQuestion] = useState("Welcome! Hover over flashcards to flip them over, instructions are on the back of THIS card."); 
   const [currentAnswer, setCurrentAnswer] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!"); 
   const [flashcardColorClass, setflashcardColorClass] = useState("flashcard-color-default");
+  const [count, setCount] = useState(0);
 
   const questions = Object.keys(QandA);
 
@@ -54,6 +55,15 @@ const App = () => {
     } 
   }
 
+  const flipCard = () => {
+    setCount(count + 1);
+    if (count % 2 == 0) {
+      // flip back to front of card (FRONT)
+    } else {
+      // flip to back of card (BACK)
+    }
+  }
+
   return (
     <div className="container">
       <div className="header-container">
@@ -76,7 +86,7 @@ const App = () => {
         <dd>places</dd>
       </dl>
 
-      <div className="flashcard">
+      <div className="flashcard" onClick={flipCard}>
         <div className="flashcard-inner">
           <div className={"flashcard-front " + flashcardColorClass}>
             <h3> {currentQuestion} </h3>
