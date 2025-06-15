@@ -16,6 +16,7 @@
   width: 550px;
   height: 350px;
   perspective: 1000px;
+  cursor: pointer;
 }
 
 .flashcard-inner {
@@ -29,7 +30,7 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.flashcard:focus .flashcard-inner {
+.flip-state {
   transform: rotateX(180deg);
 } 
 

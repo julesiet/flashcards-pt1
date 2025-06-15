@@ -27,10 +27,11 @@ const App = () => {
   };
 
   // that was over engineered i'm just gonna type it in myself bruh
-  const [currentQuestion, setCurrentQuestion] = useState("Welcome! Hover over flashcards to flip them over, instructions are on the back of THIS card."); 
+  const [currentQuestion, setCurrentQuestion] = useState("Welcome! Click on this flashcards to flip them over, instructions are on the back of THIS card."); 
   const [currentAnswer, setCurrentAnswer] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!"); 
   const [flashcardColorClass, setflashcardColorClass] = useState("flashcard-color-default");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+  const [flipper, setFlipper] = useState('');
 
   const questions = Object.keys(QandA);
 
@@ -57,10 +58,11 @@ const App = () => {
 
   const flipCard = () => {
     setCount(count + 1);
-    if (count % 2 == 0) {
-      // flip back to front of card (FRONT)
+    console.log(count);
+    if (count % 2 != 0) {
+      setFlipper("flip-state");
     } else {
-      // flip to back of card (BACK)
+      setFlipper("");
     }
   }
 
@@ -87,7 +89,7 @@ const App = () => {
       </dl>
 
       <div className="flashcard" onClick={flipCard}>
-        <div className="flashcard-inner">
+        <div className={"flashcard-inner " + flipper}>
           <div className={"flashcard-front " + flashcardColorClass}>
             <h3> {currentQuestion} </h3>
           </div>
