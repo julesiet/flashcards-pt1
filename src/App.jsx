@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const App = () => {
 
@@ -37,6 +37,7 @@ const App = () => {
   const [backText, setBackText] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!");
   const [isFlipped, setIsFlipped] = useState(false); // better way to track card flipping
   const [colorClass, setColorClass] = useState("flashcard-color-default");
+  const [image, setImage] = useState('intro.jpg');
 
   const handleNext = () => {
     let random = Math.floor(Math.random() * allQuestions.length);
@@ -44,6 +45,7 @@ const App = () => {
 
     setFrontText(question);
     setBackText(QandA[question]);
+    setImage(`${question}.jpg`);
 
     // colors based on question displayed
     if (greetings.includes(question)) setColorClass("flashcard-color-red");
@@ -78,6 +80,7 @@ const App = () => {
         <div className={`flashcard-inner ${isFlipped ? "flip-state" : ""}`}>
           <div className={`flashcard-front ${colorClass}`}>
             <h3>{frontText}</h3>
+            <img src={image} width="300" height="200"></img>
           </div>
           <div className="flashcard-back">
             <h3>{backText}</h3>
