@@ -1,108 +1,93 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () => {
 
   const QandA = {
-    "Hello!": "Kon'nichiwa!", // greeting
-    "Nice to meet you": "Onegai shimasu", // greeting
-    "Excuse me": "Sumimasen", // greeting
-    "Thank you": "Arigatōgozaimasu", // greeting
-    "Yes": "Hai", // greeting
-    "No": "Īe", // greeting
-    "Left": "Hidari", // directions
-    "Right": "Migi", // directions
-    "Bathroom": "Basurūmu", // places 
-    "Entrance": "Iriguchi", // places
-    "One (number)": "Ichi", // numbers
-    "Two (number)": "Ni", // numbers
-    "Three (number)": "San", // numbers
-    "Four (number)": "Shi", // numbers
-    "Five (number)": "Go", // numbers
-    "Six (number)": "Roku", // numbers
-    "Seven (number)": "Shichi", // numbers
-    "Eight (number)": "Hachi", // numbers
-    "Nine (number)": "Kyu", // numbers
-    "Ten (number)": "Ju", // numbers
+    "Hello!": "Kon'nichiwa!",
+    "Nice to meet you": "Onegai shimasu",
+    "Excuse me": "Sumimasen",
+    "Thank you": "Arigatōgozaimasu",
+    "Yes": "Hai",
+    "No": "Īe",
+    "Left": "Hidari",
+    "Right": "Migi",
+    "Bathroom": "Basurūmu",
+    "Entrance": "Iriguchi",
+    "One (number)": "Ichi",
+    "Two (number)": "Ni",
+    "Three (number)": "San",
+    "Four (number)": "Shi",
+    "Five (number)": "Go",
+    "Six (number)": "Roku",
+    "Seven (number)": "Shichi",
+    "Eight (number)": "Hachi",
+    "Nine (number)": "Kyu",
+    "Ten (number)": "Ju",
   };
-
-  // that was over engineered i'm just gonna type it in myself bruh
-  const [currentQuestion, setCurrentQuestion] = useState("Welcome! Click on this flashcards to flip them over, instructions are on the back of THIS card."); 
-  const [currentAnswer, setCurrentAnswer] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!"); 
-  const [flashcardColorClass, setflashcardColorClass] = useState("flashcard-color-default");
-  const [count, setCount] = useState(1);
-  const [flipper, setFlipper] = useState('');
-
-  const questions = Object.keys(QandA);
 
   const greetings = ["Hello!", "Nice to meet you", "Excuse me", "Thank you", "Yes", "No"];
   const numbers = ["One (number)", "Two (number)", "Three (number)", "Four (number)", "Five (number)", "Six (number)", "Seven (number)", "Eight (number)", "Nine (number)", "Ten (number)"];
   const directions = ["Left", "Right"];
   const places = ["Bathroom", "Entrance"];
 
-  const handleFlashcard = () => {
-    let random = Math.floor(Math.random() * questions.length);
-    setCurrentQuestion(questions[random]);
-    setCurrentAnswer(QandA[questions[random]]);
+  const allQuestions = Object.keys(QandA);
 
-    if (greetings.includes(questions[random])) { // phrases
-      setflashcardColorClass("flashcard-color-red");
-    } else if (numbers.includes(questions[random])) { // numbers
-      setflashcardColorClass("flashcard-color-green");
-    } else if (directions.includes(questions[random])) { // directions
-      setflashcardColorClass("flashcard-color-yellow");
-    } else if (places.includes(questions[random])) { // places
-      setflashcardColorClass("flashcard-color-blue");
-    } 
-  }
+  const [frontText, setFrontText] = useState("Welcome! Click on this flashcards to flip them over, instructions are on the back of this card.");
+  const [backText, setBackText] = useState("The front of a card will always be a COLORED card, the back will be WHITE - English on the FRONT, Japanese on BACK! Good luck and happy studying!");
+  const [isFlipped, setIsFlipped] = useState(false); // better way to track card flipping
+  const [colorClass, setColorClass] = useState("flashcard-color-default");
+
+  const handleNext = () => {
+    let random = Math.floor(Math.random() * allQuestions.length);
+    const question = allQuestions[random];
+
+    setFrontText(question);
+    setBackText(QandA[question]);
+
+    // colors based on question displayed
+    if (greetings.includes(question)) setColorClass("flashcard-color-red");
+    else if (numbers.includes(question)) setColorClass("flashcard-color-green");
+    else if (directions.includes(question)) setColorClass("flashcard-color-yellow");
+    else if (places.includes(question)) setColorClass("flashcard-color-blue");
+    else setColorClass("flashcard-color-default");
+
+    setIsFlipped(false);
+  };
 
   const flipCard = () => {
-    setCount(count + 1);
-    console.log(count);
-    if (count % 2 != 0) {
-      setFlipper("flip-state");
-    } else {
-      setFlipper("");
-    }
-  }
+    setIsFlipped(!isFlipped);
+  };
 
   return (
     <div className="container">
       <div className="header-container">
         <h1> Basic Japanese! 🇯🇵 </h1>
-        <h2> Departing to Japan soon? Or just curious about the language of Japan? Test your knowledge here! </h2>
-        <h4> Number of cards: {questions.length} </h4>
+        <h2>Departing to Japan soon? Or just curious about the language of Japan? Test your knowledge here!</h2>
+        <h4>Number of cards: {allQuestions.length}</h4>
       </div>
 
       <dl className="question-legend">
-        <dt className="flashcard-color-red"></dt>
-        <dd>greetings</dd>
-
-        <dt className="flashcard-color-green"></dt>
-        <dd>numbers</dd>
-
-        <dt className="flashcard-color-yellow"></dt>
-        <dd>directions</dd>
-
-        <dt className="flashcard-color-blue"></dt>
-        <dd>places</dd>
+        <dt className="flashcard-color-red"></dt><dd>greetings</dd>
+        <dt className="flashcard-color-green"></dt><dd>numbers</dd>
+        <dt className="flashcard-color-yellow"></dt><dd>directions</dd>
+        <dt className="flashcard-color-blue"></dt><dd>places</dd>
       </dl>
 
       <div className="flashcard" onClick={flipCard}>
-        <div className={"flashcard-inner " + flipper}>
-          <div className={"flashcard-front " + flashcardColorClass}>
-            <h3> {currentQuestion} </h3>
+        <div className={`flashcard-inner ${isFlipped ? "flip-state" : ""}`}>
+          <div className={`flashcard-front ${colorClass}`}>
+            <h3>{frontText}</h3>
           </div>
           <div className="flashcard-back">
-            <h3> {currentAnswer} </h3>
+            <h3>{backText}</h3>
           </div>
         </div>
       </div>
 
-      <button onClick={handleFlashcard} className="flashcard-button"> &rarr; </button> 
-
+      <button onClick={handleNext} className="flashcard-button">→</button>
     </div>
-  )
-}
+  );
+};
 
 export default App;
